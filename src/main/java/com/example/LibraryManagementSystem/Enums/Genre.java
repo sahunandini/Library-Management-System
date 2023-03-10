@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.Enums;
 
 public enum Genre {
+
     ACTION,
     FANTASY,
     HISTORY,
@@ -17,4 +18,5 @@ public enum Genre {
     DRAMA,
     SPIRITUAL,
     POETRY
+
 }

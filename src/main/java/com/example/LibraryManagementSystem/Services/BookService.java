@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.Services;
 
 
+import com.example.LibraryManagementSystem.DTOs.BookRequestDto;
 import com.example.LibraryManagementSystem.Models.Author;
 import com.example.LibraryManagementSystem.Models.Book;
 import com.example.LibraryManagementSystem.Repositories.AuthorRepository;
@@ -15,19 +16,28 @@ public class BookService {
     @Autowired
     AuthorRepository authorRepository;
 
-    public String addBook(Book book) {
+    public String addBook(BookRequestDto bookRequestDto) {
 
         // I want to get the Author Entity ??
-        int authorId = book.getAuthor().getId();
+        int authorId = bookRequestDto.getAuthorId();
 
         // Now I will be fetching the Author Entity
 
         Author author = authorRepository.findById(authorId).get();
 
 
-        // Basic attributes are already set from Postman
+        //Convertor
+        //We have created this Entity so that we can save it into the DB.
+        Book book = new Book();
 
-        // Setting the foreign key attr in the child class :
+        //Basic attributes are being from Dto to the Entity Layer
+        book.setGenre(bookRequestDto.getGenre());
+        book.setIssued(false);
+        book.setName(bookRequestDto.getName());
+        book.setPages(bookRequestDto.getPages());
+
+
+        // Setting the foreign key attribute in the child class :
         book.setAuthor(author);
 
 

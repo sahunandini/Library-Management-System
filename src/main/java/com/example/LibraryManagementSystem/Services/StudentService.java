@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.Services;
 
 
+import com.example.LibraryManagementSystem.DTOs.StudentUpdateMobileNoRequestDto;
 import com.example.LibraryManagementSystem.Enums.CardStatus;
 import com.example.LibraryManagementSystem.Models.Card;
 import com.example.LibraryManagementSystem.Models.Student;
@@ -47,15 +48,16 @@ public class StudentService {
         return student.getName();
     }
 
-    public String updateMobileNo(Student newStudent) {
+    public String updateMobileNo(StudentUpdateMobileNoRequestDto studentReq) {
 
+        //CONVERT THE DTO TO ENTITY : saved better
 
         // First we will try to fetch original Data
-        Student originalStudent = studentRepository.findById(newStudent.getId()).get();
+        Student originalStudent = studentRepository.findById(studentReq.getId()).get();
 
         // We will keep the other properties as it is : and only change the required parameters
 
-        originalStudent.setMobileNo(newStudent.getMobileNo());
+        originalStudent.setMobileNo(studentReq.getMobileNo());
 
         // Always entity object is being saved
         studentRepository.save(originalStudent);
